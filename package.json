@@ -1,0 +1,28 @@
+{
+  "name": "til-badge",
+  "version": "0.0.1",
+  "description": "A simple server for generating number of til badge",
+  "main": "index.js",
+  "scripts": {
+    "start": "micro",
+    "dev": "micro-dev"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/rishipuri/til-badge.git"
+  },
+  "author": "Rishipuri",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/rishipuri/til-badge/issues"
+  },
+  "homepage": "https://github.com/rishipuri/til-badge#readme",
+  "devDependencies": {
+    "micro-dev": "^1.2.1"
+  },
+  "dependencies": {
+    "axios": "^0.16.2",
+    "dotenv": "^4.0.0",
+    "micro": "^8.0.3"
+  }
+}
