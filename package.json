@@ -7,6 +7,15 @@
     "start": "micro",
     "dev": "micro-dev"
   },
+  "now": {
+    "alias": "til-badge",
+    "env": {
+      "NODE_ENV": "production"
+    },
+    "files": [
+      "index.js"
+    ]
+  },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/rishipuri/til-badge.git"
