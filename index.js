@@ -3,15 +3,15 @@ require('dotenv').config();
 const axios = require('axios');
 
 module.exports = async(req, res) => {
-  const url = `https://api.github.com/repos/${process.env.repo_owner}/${process.env.repo_name}/contents`;
+  const url = `https://api.github.com/repos/rishipuri/til/contents`;
   const data = await request(url);
   const urls = dirUrls(data);
   const count = await dirFileCount(urls);
-  const badgeUrl = `https://img.shields.io/badge/${process.env.badge_subject}-${count}-${process.env.badge_color}.svg`
+  const badgeUrl = `https://img.shields.io/badge/topics-${count}-green.svg`;
 
   res.writeHead(302, {
     'Location': badgeUrl
-  })
+  });
   res.end();
 }
 
@@ -23,7 +23,7 @@ const request = async(url) => {
     auth: {
       username: process.env.gh_username,
       password: process.env.gh_token
-    }
+    },
   });
 
   return data;
@@ -38,7 +38,7 @@ const dirUrls = (data) => {
     return false;
   }).map((dir) => {
     return dir.git_url;
-  })
+  });
 
   return urls;
 }
