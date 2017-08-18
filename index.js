@@ -7,7 +7,7 @@ module.exports = async(req, res) => {
   const data = await request(url);
   const urls = dirUrls(data);
   const count = await dirFileCount(urls);
-  const badgeUrl = `https://img.shields.io/badge/topics-${count}-green.svg`;
+  const badgeUrl = `https://img.shields.io/badge/topics-${count}-green.svg?maxAge=0`;
 
   res.writeHead(302, {
     'Location': badgeUrl
