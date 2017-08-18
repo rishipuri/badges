@@ -10,7 +10,8 @@ module.exports = async(req, res) => {
   const badgeUrl = `https://img.shields.io/badge/topics-${count}-green.svg?maxAge=0`;
 
   res.writeHead(302, {
-    'Location': badgeUrl
+    'Location': badgeUrl,
+    'Cache-Control': 'no-cache'
   });
   res.end();
 }
