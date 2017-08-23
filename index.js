@@ -2,7 +2,57 @@ require('dotenv').config();
 
 const axios = require('axios');
 
-module.exports = async(req, res) => {
+const request = async (url, githubAuth) => {
+  const req = {
+    method: 'GET',
+    url,
+    responseType: 'json'
+  };
+
+  if (githubAuth) {
+    req.auth = {
+      username: process.env.gh_username,
+      password: process.env.gh_token
+    };
+  }
+
+  const {data} = await axios(req);
+
+  return data;
+};
+
+const dirUrls = data => {
+  const urls = data.filter(content => {
+    if (content.type === 'dir') {
+      return true;
+    }
+
+    return false;
+  }).map(dir => {
+    return dir.git_url;
+  });
+
+  return urls;
+};
+
+const dirFileCount = async urls => {
+  const data = [];
+  let count = 0;
+
+  for (const url of urls) {
+    data.push(request(url, true));
+  }
+
+  await Promise.all(data).then(values => {
+    values.forEach(dir => {
+      count += dir.tree.length;
+    });
+  });
+
+  return count;
+};
+
+module.exports = async (req, res) => {
   const url = `https://api.github.com/repos/rishipuri/til/contents`;
   const data = await request(url, true);
   const urls = dirUrls(data);
@@ -13,52 +63,8 @@ module.exports = async(req, res) => {
   res.writeHead(200, {
     'Content-Type': 'image/svg+xml',
     'Cache-Control': 'no-cache, no-store, must-revalidate',
-    'Expires': 0,
-    'Pragma': 'no-cache'
+    Expires: 0,
+    Pragma: 'no-cache'
   });
   res.end(svg);
-}
-
-const request = async(url, gh_auth) => {
-  let req = {
-    method: 'GET',
-    url: url,
-    responseType: 'json'
-  };
-
-  if (gh_auth) {
-    req['auth'] = {
-      username: process.env.gh_username,
-      password: process.env.gh_token
-    };
-  }
-
-  const { status, data } = await axios(req);
-
-  return data;
-}
-
-const dirUrls = (data) => {
-  let urls = data.filter((content) => {
-    if (content.type === 'dir') {
-      return true;
-    }
-
-    return false;
-  }).map((dir) => {
-    return dir.git_url;
-  });
-
-  return urls;
-}
-
-const dirFileCount = async(urls) => {
-  let count = 0;
-
-  for (let url of urls) {
-    const data = await request(url, true);
-    count += data.tree.length;
-  }
-
-  return count;
-}
+};
