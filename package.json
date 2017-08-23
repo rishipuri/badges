@@ -9,7 +9,7 @@
     "test": "xo"
   },
   "now": {
-    "alias": "badges",
+    "alias": "badges.rishipuri.co.uk",
     "env": {
       "NODE_ENV": "production"
     },
