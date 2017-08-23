@@ -1,7 +1,7 @@
 {
-  "name": "til-badge",
+  "name": "badges",
   "version": "0.0.1",
-  "description": "A simple server for generating number of til badge",
+  "description": "A simple microservice to generate shields.io badges for various usecases and repos.",
   "main": "index.js",
   "scripts": {
     "start": "micro",
@@ -9,7 +9,7 @@
     "test": "xo"
   },
   "now": {
-    "alias": "til-badge",
+    "alias": "badges",
     "env": {
       "NODE_ENV": "production"
     },
@@ -19,14 +19,14 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/rishipuri/til-badge.git"
+    "url": "git+https://github.com/rishipuri/badges.git"
   },
   "author": "Rishipuri",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/rishipuri/til-badge/issues"
+    "url": "https://github.com/rishipuri/badges/issues"
   },
-  "homepage": "https://github.com/rishipuri/til-badge#readme",
+  "homepage": "https://github.com/rishipuri/badges#readme",
   "devDependencies": {
     "micro-dev": "^1.2.1",
     "xo": "^0.18.2"
@@ -34,7 +34,9 @@
   "dependencies": {
     "axios": "^0.16.2",
     "dotenv": "^4.0.0",
-    "micro": "^8.0.3"
+    "finalhandler": "^1.0.4",
+    "micro": "^8.0.3",
+    "router": "^1.3.1"
   },
   "xo": {
     "space": true

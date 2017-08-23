@@ -1,3 +1,3 @@
-# til-badge
+# badges
 
-A simple microservice to generate shields.io badge for my til repo.
+A simple microservice to generate shields.io badges for various usecases and repos.
