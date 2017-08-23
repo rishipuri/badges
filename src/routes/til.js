@@ -74,6 +74,6 @@ const topics = async (req, res) => {
     Pragma: 'no-cache'
   });
   res.end(svg);
-}
+};
 
 module.exports.topics = topics;

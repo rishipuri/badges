@@ -14,4 +14,4 @@ router.get('/til/topics', topics);
 
 module.exports = (req, res) => {
   router(req, res, finalhandler(req, res));
-}
+};
