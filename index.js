@@ -2,17 +2,24 @@ require('dotenv').config();
 
 const axios = require('axios');
 
-const request = async (url, githubAuth) => {
+const {GH_USERNAME, GH_TOKEN} = process.env;
+let auth = false;
+
+if (GH_USERNAME && GH_TOKEN) {
+  auth = true;
+}
+
+const request = async url => {
   const req = {
     method: 'GET',
     url,
     responseType: 'json'
   };
 
-  if (githubAuth) {
+  if (auth) {
     req.auth = {
-      username: process.env.gh_username,
-      password: process.env.gh_token
+      username: GH_USERNAME,
+      password: GH_TOKEN
     };
   }
 
@@ -40,7 +47,7 @@ const dirFileCount = async urls => {
   let count = 0;
 
   for (const url of urls) {
-    data.push(request(url, true));
+    data.push(request(url));
   }
 
   await Promise.all(data).then(values => {
@@ -54,7 +61,7 @@ const dirFileCount = async urls => {
 
 module.exports = async (req, res) => {
   const url = `https://api.github.com/repos/rishipuri/til/contents`;
-  const data = await request(url, true);
+  const data = await request(url);
   const urls = dirUrls(data);
   const count = await dirFileCount(urls);
   const badgeUrl = `https://img.shields.io/badge/topics-${count}-green.svg?maxAge=0`;
